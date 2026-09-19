@@ -32,8 +32,7 @@ pub fn search() -> Result<()> {
             } else {
                 if file == check_file {
                     println!("found {}", file);
-                }
-                if check_file.contains(file) {
+                } else if check_file.contains(file) {
                     println!("found {}", check_file);
                 } else {
                     continue;

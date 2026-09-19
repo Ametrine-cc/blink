@@ -3,10 +3,6 @@ use std::sync::{LazyLock, Mutex};
 
 mod git;
 mod search;
-mod tui;
-
-#[warn(unused)]
-static ERROR_BUF: Mutex<String> = Mutex::new(String::new());
 
 static CHECK_STACK: LazyLock<Mutex<Vec<String>>> = LazyLock::new(|| Mutex::new(Vec::new()));
 static IGNORE_STACK: LazyLock<Mutex<Vec<String>>> = LazyLock::new(|| Mutex::new(Vec::new()));
@@ -129,9 +125,6 @@ pub fn is_toggle_verbose() -> bool {
 
 // main
 fn main() {
-    #[warn(unused_variables)]
-    let current_err = ERROR_BUF.lock().unwrap();
-
     let mut depth: i32 = 0;
 
     // Get arguments
@@ -140,9 +133,7 @@ fn main() {
 
     // Parse arguments
     while let Some(arg) = args.next() {
-        if "--tui" == arg {
-            tui::tui_view(&current_err);
-        } else if "--dir" == arg {
+        if "--dir" == arg {
             if let Some(dir) = args.next() {
                 check_dir = dir;
             }
@@ -200,8 +191,3 @@ fn free_stacks() {
     release_stacks(Stacks::IgnoreStack);
     release_stacks(Stacks::FileStack);
 }
-
-// fn set_major_error(msg: &str) {
-//     eprintln!("error -> {}", msg);
-//     free_stacks();
-// }
