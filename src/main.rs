@@ -26,12 +26,9 @@ fn main() {
     let mut args = std::env::args().skip(1);
 
     while let Some(arg) = args.next() {
-        // println!("{}", arg);
-
         match arg.as_str() {
             cmd if blink_commands.help.iter().any(|h| h == cmd) => {
-                // println!("help");
-                cli::help(&cli_arguments);
+                cli::help(&cli_arguments, &blink_commands);
             }
             _ => { /* continue; */ }
         }
