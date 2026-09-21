@@ -1,6 +1,9 @@
-use crate::{BlinkCommands, CliArguments};
+use crate::{BLINK_COMMANDS, CLI_ARGUMENTS};
 
-pub fn help(cli_arguments: &CliArguments, blink_commands: &BlinkCommands) {
+pub fn help() {
+    let cmd = BLINK_COMMANDS.lock().unwrap();
+    let args = CLI_ARGUMENTS.lock().unwrap();
+
     println!("Ametrine Foundation: blink");
     println!("Authors -> Noticxs, Ametrine Foundation\n");
 
@@ -8,8 +11,8 @@ pub fn help(cli_arguments: &CliArguments, blink_commands: &BlinkCommands) {
 
     println!("Commands:");
     println!(
-        "    {} or {}              : shows this help command",
-        blink_commands.help[0], blink_commands.help[1]
+        "\t{} or {}              : shows this help command",
+        cmd.help[0], cmd.help[1]
     );
 
     print!("\n");
@@ -17,19 +20,19 @@ pub fn help(cli_arguments: &CliArguments, blink_commands: &BlinkCommands) {
     println!("Arguments:");
 
     println!(
-        "    {} or {}              : enables deep searching (search through other directories)",
-        cli_arguments.deep_search[0], cli_arguments.deep_search[1]
+        "\t{} or {}              : enables deep searching (search through other directories)",
+        args.deep_search[0], args.deep_search[1]
     );
     println!(
-        "    {} or {}           : enables verbose debug output (see everything blink is doing)",
-        cli_arguments.verbose[0], cli_arguments.verbose[1]
+        "\t{} or {}           : enables verbose debug output (see everything blink is doing)",
+        args.verbose[0], args.verbose[1]
     );
     println!(
-        "    {} or {}      : show files that are hidden due to the '.' prefix",
-        cli_arguments.show_hidden[0], cli_arguments.show_hidden[1]
+        "\t{} or {}      : show files that are hidden due to the '.' prefix",
+        args.show_hidden[0], args.show_hidden[1]
     );
     println!(
-        "    {} or {}  : show files hidden by .gitignore",
-        cli_arguments.show_gitignored[0], cli_arguments.show_gitignored[1]
+        "\t{} or {}  : show files hidden by .gitignore",
+        args.show_gitignored[0], args.show_gitignored[1]
     );
 }
