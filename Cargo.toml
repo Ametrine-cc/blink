@@ -25,6 +25,8 @@ keywords = ["cli", "ametrine", "search", "terminal", "linux"]
 categories = ["cli", "file-search"]
 
 [dependencies]
+clap = { version = "4", features = ["derive"] }
+clap_complete = "4"
 
 [[bin]]
 name = "blink"
